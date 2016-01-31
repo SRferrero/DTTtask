@@ -162,6 +162,20 @@ textarea.form-control {
    
 .link{
     padding-top:8px;
-   }
+}
 
-   
+.titleadm{
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #ffdb4d;	
+}
+.wdgtadmin{
+    font-size: 0.7em;
+    margin-bottom:10px;
+}
+
+.logout{
+
+
+}
