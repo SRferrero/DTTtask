@@ -6,13 +6,19 @@
     echo setTitle($template);
     
     if($action==null){
-        $query = $pdo->prepare("INSERT INTO 'users'('name', 'password') VALUES ('samuel',bcrypt('DTTemployee'))");
-        $query->execute();
+
         header("Location: DTTadmin.php?a=login");
         
     }else if($action=="login"){
     
         require_once("logIn.html");
+                
+        /*$query = $pdo->prepare("INSERT INTO users(name, password) VALUES (?,?)");
+        $query->bindParam(1, $name);
+        $query->bindParam(2, $pass);
+        $name = "samuel";
+        $pass = bcrypt('DTTemployee');
+        $query->execute();*/
         
     }else if($action=="check"){
 
@@ -20,14 +26,16 @@
         $pass=$_POST["password"];
 
         $_SESSION["error"]=login($user, $pass);
-        header("Location: DTTadmin.php?a=login");
+        header("Location: DTTadmin.php?a=admin");
 
    //Pagina de registro
     }else if($action=="admin"){
     
-        if(!isset($_SESSION["id"])){
+        if(!isset($_SESSION["name"])){
+            header("Location: DTTadmin.php?a=login");
 
         }else{
+            //var_dump($_SESSION["name"]);
 	        echo file_get_contents("widgetAdmin.html");
         }
     }else{

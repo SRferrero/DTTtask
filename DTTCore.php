@@ -57,27 +57,24 @@
         }
    
    }
-/*function login($user, $password){ 
+function login($user, $password){ 
 
     $error=0;
     if (!empty($user) && !empty($password)){
-
+      echo "here";
      global $pdo; 
-     $query = $pdo->prepare("SELECT * FROM users WHERE user='$user'"); //Busco el user
+     $query = $pdo->prepare("SELECT * FROM users WHERE name = '" . $user . "'"); 
      $query->execute();
      $num = $query->rowCount(); 
 
      if($num!=0){
-        $row = $query->fetch()
+        $row = $query->fetch();
 
-            //Ahora que se que existe el user compruebo el password
+            //Check with hash password
         if(password_verify($password, $row["password"])){
-
-               //Creo la sesion asignando variables de sesion con los datos del usuario
-            $_SESSION["id"] = $row["id"];
             $_SESSION["name"] = $row["name"];
-            $_SESSION["user"] = $row["user"];
-            $_SESSION['timeout'] = time();
+            
+            //$_SESSION['timeout'] = time();
             
          }else{ $error="Wrong Password"; }
          
@@ -88,9 +85,9 @@
 
     }else{ $error=-1; }
 
-      return $error;
+    return $error;
 
-}*/
+}
 
 function bcrypt($password){ 
     $options = array('cost' => 10);
