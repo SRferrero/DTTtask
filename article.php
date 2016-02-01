@@ -57,7 +57,10 @@
                 $save = $_POST["save"];
 	            $cancel = $_POST["cancel"];	
 	            if (isset($save)) {
-	                
+	                $title = $_POST["artTit"];
+	                $sumary = $_POST["sumary"];
+	                $content = $_POST["Article"];
+	                $date = $_POST["date"];
 	                //who expects the own admin injectin bad querys?
 	                $query = $pdo->prepare("INSERT INTO articleTable (id, title, sumary, article, publishdate) VALUES ()"); 
 	            }
