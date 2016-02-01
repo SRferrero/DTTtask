@@ -5,7 +5,8 @@
   
 	$username = "root"; // username
 	$password = "mono"; // password
-
+    session_name("DTT");
+    session_start();
 	try {
 		$pdo = new PDO('mysql:host=localhost;dbname=articles;charset=utf8', $username, $password, 
       		array(PDO::ATTR_PERSISTENT => true));
@@ -13,9 +14,6 @@
 	} catch (Exception $e) {
         die("No se pudo conectar: " . $e->getMessage());
 	}
-    session_name("DTT");
-    session_start();
-	
 	
     function display($row){
         $html = file_get_contents("templateArticles.html");
@@ -92,8 +90,7 @@
             global $pdo; 
             //TODO sqlinject thing
             $query = $pdo->prepare("SELECT * FROM users WHERE name = :name"); 
-            $query->execute(array('name' => $name));
-            //$query->execute();
+            $query->execute(array('name' => $user));
             $num = $query->rowCount(); 
 
             if($num!=0){
@@ -101,15 +98,11 @@
 
                 //Check with hash password
                 if(password_verify($password, $row["password"])){
-        
+                    
                     $_SESSION["name"] = $row["name"];
                        
                 }else{ $error="Wrong Password"; }
-         
             }else{ $error="user not in the system"; }
-
-            mysqli_free_result($query);
-
         }else{ $error=-1; }
 
         return $error;

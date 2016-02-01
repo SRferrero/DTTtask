@@ -45,11 +45,12 @@
 
         }else{ 
             $adminArt = $_GET["b"];//if null
-
-            if($adminArt=="add"){
-        
-	
-	        }else if($adminArt=="add"){
+            /*switch ($adminArt) {
+            case null:
+            }*/
+            if($adminArt== null){
+                header("Location: index.php");
+            }else if($adminArt=="add"){
 	   
 	
 	        }else if($adminArt=="check"){
@@ -60,16 +61,16 @@
 	            if (isset($cancel)) {header("Location: index.php");}
 	        }else if($adminArt=="edit"){
 	            $id = $_GET["c"];//if not null also
-	            
-	            echo setTitle($template, "Edit Article");
-	       
-	            //TODO sql injection protection
-	            $query = $pdo->prepare("SELECT * FROM articleTable WHERE id = :id"); 
-                $query->execute(array('id' => $id));
-                $row = $query->fetch();
-	            echo loadFormEdit($row);
-	            $link = '<a href = "article.php?a=admin&b=delete&c=' . $id . '">Delete This Article</a>';
-	            echo setFoot($link);
+	            if($id== null){
+	            }else{
+	                echo setTitle($template, "Edit Article");
+	                $query = $pdo->prepare("SELECT * FROM articleTable WHERE id = :id"); 
+                    $query->execute(array('id' => $id));
+                    $row = $query->fetch();
+	                echo loadFormEdit($row);
+	                $link = '<a href = "article.php?a=admin&b=delete&c=' . $id . '">Delete This Article</a>';
+	                echo setFoot($link);
+	            }
 	        }else if($adminArt=="delete"){
 	    
 	            $id = $_GET["c"];//if not null

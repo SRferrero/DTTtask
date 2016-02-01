@@ -1,6 +1,7 @@
 <?php
     require_once("DTTCore.php");
     $action = $_GET["a"];
+    
     //we dont have sesion yet
     $template = file_get_contents("DTTHeader.html");
     echo setTitle($template);
@@ -20,11 +21,9 @@
             header("Location: DTTadmin.php?a=admin");
     
         require_once("logIn.html");
-        echo setFoot();  
-
-        
+        echo setFoot();
     }else if($action=="check"){
-
+    
         $user=$_POST["user"];
         $pass=$_POST["password"];
 
@@ -56,7 +55,7 @@
         }
     }else if($action=="logout"){
         logout();
-        header("Location: index.php")
+        header("Location: index.php");
     
     }else{
         header("Location: DTTadmin.php?a=login");
