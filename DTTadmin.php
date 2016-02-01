@@ -50,7 +50,7 @@
 			    }	
 			
 		    }
-	        $link = '</table> <br/>'. $count .' articles in total<br/><br/><a href = "article.php?a=add">Add a New Article</a>';
+	        $link = '</table> <br/>'. $count .' articles in total<br/><br/><a href = "article.php?a=admin&b=add">Add a New Article</a>';
 	        echo setFoot($link);
         }
     }else if($action=="logout"){

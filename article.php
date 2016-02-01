@@ -45,22 +45,26 @@
 
         }else{ 
             $adminArt = $_GET["b"];//if null
-            /*switch ($adminArt) {
+            switch ($adminArt) {
             case null:
-            }*/
-            if($adminArt== null){
                 header("Location: index.php");
-            }else if($adminArt=="add"){
-	   
-	
-	        }else if($adminArt=="check"){
-	            $save = $_POST["save"];
+                break;
+            case "add":
+                echo setTitle($template, "New Article");
+                echo loadFormEdit($row);
+                break;
+            case "check":
+                $save = $_POST["save"];
 	            $cancel = $_POST["cancel"];	
-	            if (isset($save)) {//add to de database
+	            if (isset($save)) {
+	                
+	                //who expects the own admin injectin bad querys?
+	                $query = $pdo->prepare("INSERT INTO articleTable (id, title, sumary, article, publishdate) VALUES ()"); 
 	            }
-	            if (isset($cancel)) {header("Location: index.php");}
-	        }else if($adminArt=="edit"){
-	            $id = $_GET["c"];//if not null also
+	            if (isset($cancel)) {header("Location: DTTadmin.php?a=admin");}
+                break;
+            case "edit":
+                $id = $_GET["c"];//if not null also
 	            if($id== null){
 	            }else{
 	                echo setTitle($template, "Edit Article");
@@ -71,13 +75,19 @@
 	                $link = '<a href = "article.php?a=admin&b=delete&c=' . $id . '">Delete This Article</a>';
 	                echo setFoot($link);
 	            }
-	        }else if($adminArt=="delete"){
-	    
-	            $id = $_GET["c"];//if not null
+                break;
+            case "delete":
+                $id = $_GET["c"];//if not null delete else go admin and dont play with urls
+                if(!isset($id))
+                    header("Location: DTTadmin.php?a=admin");
 	            $query = $pdo->prepare("DELETE FROM articleTable WHERE if = :id"); 
                 $query->execute(array('id' => $id));
 	            header("Location: DTTadmin.php?a=admin");
-	        }
+                break;
+            default:
+                header("Location: DTTadmin.php?a=login");
+            }
+          
 	    }
 	}else{
 		header("Location: index.php");

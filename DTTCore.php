@@ -80,6 +80,15 @@
         $form = str_replace("{{DATE}}", $row["publishdate"], $form);
         return $form;
     }
+    function newArticle($nArt = "nuevo articulo"){
+        $form = file_get_contents("formArticle.html");
+        $form = str_replace("{{TITLE}}", $nArt, $form);
+        $form = str_replace("{{SUMARY}}", $nArt, $form);
+        $form = str_replace("{{ARTICLE}}", $nArt, $form);
+        $form = str_replace("{{DATE}}", $nArt, $form);
+        
+        return $article;
+   }
    
    
     function login($user, $password){ 
