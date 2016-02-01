@@ -51,24 +51,42 @@
                 break;
             case "add":
                 echo setTitle($template, "New Article");
-                echo loadFormEdit($row);
+                echo newArticle();
                 break;
             case "check":
-                $save = $_POST["save"];
-	            $cancel = $_POST["cancel"];	
+                $save = isset($_POST["save"]) ? $_POST["save"] : null;
+                $update = isset($_POST["update"]) ? $_POST["update"] : null;
+	            $cancel = isset($_POST["cancel"]) ? $_POST["cancel"] : null;	
 	            if (isset($save)) {
 	                $title = $_POST["artTit"];
 	                $sumary = $_POST["sumary"];
 	                $content = $_POST["Article"];
 	                $date = $_POST["date"];
 	                //who expects the own admin injectin bad querys?
-	                $query = $pdo->prepare("INSERT INTO articleTable (title, sumary, article, publishdate) VALUES ('$title', '$sumary', '$content', '$date')"); 
+	                $query = $pdo->prepare("INSERT INTO articleTable (title, sumary, article, publishdate) VALUES ('$title', '$sumary', '$content', '$date')");
+	                
+	                 $query->execute();
+	                 //var_dump($query->execute());exit(0);
+	                 header("Location: DTTadmin.php?a=admin");
 	            }
-	            if (isset($cancel)) {header("Location: DTTadmin.php?a=admin");}
+	            else if (isset($cancel)) {header("Location: DTTadmin.php?a=admin");}
+	            else if (isset($update)) {
+	                $title = $_POST["artTit"];
+	                $sumary = $_POST["sumary"];
+	                $content = $_POST["Article"];
+	                $date = $_POST["date"];
+	                $id = $_POST["id"];
+	                //who expects the own admin injectin bad querys?
+	                $query = $pdo->prepare("UPDATE articleTable SET title = '$title' sumary = '$sumary' article = '$content' publishdate = '$date' WHERE id = '$id'");
+	                $query->execute();
+	            
+	                header("Location: DTTadmin.php?a=admin");
+	            }
                 break;
             case "edit":
                 $id = $_GET["c"];//if not null also
 	            if($id== null){
+	                header("Location: DTTadmin.php?a=admin");
 	            }else{
 	                echo setTitle($template, "Edit Article");
 	                $query = $pdo->prepare("SELECT * FROM articleTable WHERE id = :id"); 

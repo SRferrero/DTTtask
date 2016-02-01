@@ -78,6 +78,8 @@
         $form = str_replace("{{SUMARY}}", $row["sumary"], $form);
         $form = str_replace("{{ARTICLE}}", $row["article"], $form);
         $form = str_replace("{{DATE}}", $row["publishdate"], $form);
+        $form = str_replace("{{ID}}", $row["id"], $form);
+        $form = str_replace("{{BUTTON}}", "update", $form);
         return $form;
     }
     function newArticle($nArt = "nuevo articulo"){
@@ -86,8 +88,9 @@
         $form = str_replace("{{SUMARY}}", $nArt, $form);
         $form = str_replace("{{ARTICLE}}", $nArt, $form);
         $form = str_replace("{{DATE}}", $nArt, $form);
+        $form = str_replace("{{BUTTON}}", "save", $form);
         
-        return $article;
+        return $form;
    }
    
    
