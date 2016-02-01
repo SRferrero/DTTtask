@@ -23,6 +23,10 @@ a {
   
 }
 
+a#special:hover, a#special:focus{
+    text-decoration: underline;
+}
+
 a:active,
 a:hover {
   outline: 0;
@@ -174,7 +178,30 @@ textarea.form-control {
     font-size: 0.7em;
     margin-bottom:10px;
 }
+table#t01{
+    width: 90%;
+    text-align: left;
+    border-right: 1px solid #2eb8b8;
+    border-left: 1px solid #2eb8b8;
+    border-spacing: 0px;
+}
+table#t01 th	{
+    background-color: #ff9933;
+    color: white;
+    border-top: 1px solid #2eb8b8;
+    border-bottom: 1px solid #2eb8b8;
+}
 
+table#t01 tr{
+    border-right: 1px solid #2eb8b8;
+    border-left: 1px solid #2eb8b8;
+}
+table#t01 tr:nth-child(odd) {
+    background-color: #ffe6cc;
+}
+table#t01 tr:nth-child(even) {
+   background-color:#fff;
+}
 .logout{
 
 

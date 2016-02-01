@@ -20,6 +20,4 @@
 	
 	//Override link for footer.
 	$link = '<a href = "article.php?a=allStories">Article Archive</a>';
-    $footer = file_get_contents("DTTFooter.html");
-  	$footer = str_replace("{{link}}", $link, $footer);
-    echo $footer;
+    echo  setFoot($link);
