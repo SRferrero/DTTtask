@@ -82,6 +82,7 @@
         $form = str_replace("{{BUTTON}}", "update", $form);
         return $form;
     }
+    
     function newArticle($nArt = "nuevo articulo"){
         $form = file_get_contents("formArticle.html");
         $form = str_replace("{{TITLE}}", $nArt, $form);

@@ -66,7 +66,7 @@
 	                $query = $pdo->prepare("INSERT INTO articleTable (title, sumary, article, publishdate) VALUES ('$title', '$sumary', '$content', '$date')");
 	                
 	                 $query->execute();
-	                 //var_dump($query->execute());exit(0);
+
 	                 header("Location: DTTadmin.php?a=admin");
 	            }
 	            else if (isset($cancel)) {header("Location: DTTadmin.php?a=admin");}
@@ -76,10 +76,12 @@
 	                $content = $_POST["Article"];
 	                $date = $_POST["date"];
 	                $id = $_POST["id"];
+	                //var_dump($id);exit(0);
 	                //who expects the own admin injectin bad querys?
 	                $query = $pdo->prepare("UPDATE articleTable SET title = '$title' sumary = '$sumary' article = '$content' publishdate = '$date' WHERE id = '$id'");
-	                $query->execute();
-	            
+	                
+	                //$query->execute();
+	                //var_dump($query);exit(0);
 	                header("Location: DTTadmin.php?a=admin");
 	            }
                 break;
