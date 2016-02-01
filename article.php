@@ -62,7 +62,7 @@
 	                $content = $_POST["Article"];
 	                $date = $_POST["date"];
 	                //who expects the own admin injectin bad querys?
-	                $query = $pdo->prepare("INSERT INTO articleTable (id, title, sumary, article, publishdate) VALUES ()"); 
+	                $query = $pdo->prepare("INSERT INTO articleTable (title, sumary, article, publishdate) VALUES ('$title', '$sumary', '$content', '$date')"); 
 	            }
 	            if (isset($cancel)) {header("Location: DTTadmin.php?a=admin");}
                 break;
