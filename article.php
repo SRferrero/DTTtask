@@ -38,52 +38,45 @@
   		    echo "Fail: " . $e->getMessage();
 	    }
 	
-	}else if($action=="add"){
+	}else if($action=="admin"){
+	
 	    if(!isset($_SESSION["name"])){
             header("Location: DTTadmin.php?a=login");
 
-        }else{}
+        }else{ 
+            $adminArt = $_GET["b"];//if null
+
+            if($adminArt=="add"){
+        
 	
-	}else if($action=="addUp"){
-	    $save = $_POST["save"];
-	    $cancel = $_POST["cancel"];
+	        }else if($adminArt=="add"){
 	   
-	    if(!isset($_SESSION["name"])){
-            header("Location: DTTadmin.php?a=login");
-
-        }else{
 	
-	        if (isset($save)) {header("Location: DTTadmin.php?a=admin");}
-	        if (isset($cancel)) {header("Location: index.php");}
-	    }
-	
-	}else if($action=="edit"){
-	
-	    if(!isset($_SESSION["name"])){
-            header("Location: DTTadmin.php?a=login");
-
-        }else{
-	        $id = $_GET["c"];//if not null also
-	        echo setTitle($template, "Edit Article");
+	        }else if($adminArt=="check"){
+	            $save = $_POST["save"];
+	            $cancel = $_POST["cancel"];	
+	            if (isset($save)) {//add to de database
+	            }
+	            if (isset($cancel)) {header("Location: index.php");}
+	        }else if($adminArt=="edit"){
+	            $id = $_GET["c"];//if not null also
+	            
+	            echo setTitle($template, "Edit Article");
 	       
-	        //TODO sql injection protection
-	        $query = $pdo->prepare("SELECT * FROM articleTable WHERE id =" . $id);	
-            $query->execute();
-            $row = $query->fetch();
-	        echo loadFormEdit($row);
-	        $link = '<a href = "article.php?a=delete&c=' . $id . '">Delete This Article</a>';
-	        echo setFoot($link);
-	    }
-	
-	}else if($action=="delete"){
-	    if(!isset($_SESSION["name"])){
-            header("Location: DTTadmin.php?a=login");
-
-        }else{
-	        $id = $_GET["c"];//if not null
-	        $query = $pdo->prepare("DELETE FROM articleTable WHERE if = :id"); 
-            $query->execute(array('id' => $id));
-	        header("Location: DTTadmin.php?a=admin");
+	            //TODO sql injection protection
+	            $query = $pdo->prepare("SELECT * FROM articleTable WHERE id = :id"); 
+                $query->execute(array('id' => $id));
+                $row = $query->fetch();
+	            echo loadFormEdit($row);
+	            $link = '<a href = "article.php?a=admin&b=delete&c=' . $id . '">Delete This Article</a>';
+	            echo setFoot($link);
+	        }else if($adminArt=="delete"){
+	    
+	            $id = $_GET["c"];//if not null
+	            $query = $pdo->prepare("DELETE FROM articleTable WHERE if = :id"); 
+                $query->execute(array('id' => $id));
+	            header("Location: DTTadmin.php?a=admin");
+	        }
 	    }
 	}else{
 		header("Location: index.php");

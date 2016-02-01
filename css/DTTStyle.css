@@ -63,6 +63,7 @@ h1{
 
 textarea.form-control {
   height: auto;
+  width:90%;
 }
 
 .btn {
@@ -185,6 +186,11 @@ table#t01{
     border-left: 1px solid #2eb8b8;
     border-spacing: 0px;
 }
+#t01 a:link, a:hover, a:visited, a:active{
+    text-decoration:none;
+    color:black;
+}
+
 table#t01 th	{
     background-color: #ff9933;
     color: white;

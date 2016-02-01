@@ -76,10 +76,10 @@
     
     function loadFormEdit($row){
         $form = file_get_contents("formArticle.html");
-        $form = str_replace("{{TITLE}}",$row["title"],$form);
-        $form = str_replace("{{SUMARY}}",$row["sumary"],$form);
-        $form = str_replace("{{ARTICLE}}",$row["article"],$form);
-        $form = str_replace("{{DATE}}",$row["publishdate"],$form);
+        $form = str_replace("{{TITLE}}", $row["title"], $form);
+        $form = str_replace("{{SUMARY}}", $row["sumary"], $form);
+        $form = str_replace("{{ARTICLE}}", $row["article"], $form);
+        $form = str_replace("{{DATE}}", $row["publishdate"], $form);
         return $form;
     }
    

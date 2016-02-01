@@ -16,7 +16,7 @@
         header("Location: DTTadmin.php?a=login");
         
     }else if($action=="login"){
-        if(!isset($_SESSION["name"]))
+        if(isset($_SESSION["name"]))
             header("Location: DTTadmin.php?a=admin");
     
         require_once("logIn.html");
@@ -54,8 +54,12 @@
 	        $link = '</table> <br/>'. $count .' articles in total<br/><br/><a href = "article.php?a=add">Add a New Article</a>';
 	        echo setFoot($link);
         }
+    }else if($action=="logout"){
+        logout();
+        header("Location: index.php")
+    
     }else{
         header("Location: DTTadmin.php?a=login");
     }
-	echo "<a href='index.php'>building</a>";
+
 
