@@ -2,6 +2,7 @@
 	require_once("DTTCore.php");
 	 $action = $_GET["a"];
 	 $template = file_get_contents("DTTHeader.html");
+	 
 
 	 //just loading the page first time
 	if($action == null){
@@ -21,13 +22,14 @@
 		}
 	
 	}else if($action=="allStories"){
-	//TODO show maybe 15 and add a load more
+
 	    try {  
-  		    $query = $pdo->prepare("SELECT * FROM articleTable");	
+  		    $query = $pdo->prepare("SELECT * FROM articleTable ORDER BY id DESC");	
             if ($query->execute()) { 
 		        $count = 0;
+		        echo setTitle($template, "Article Archive");
 		        while ($row = $query->fetch()){
-		            echo setTitle($template, "Article Archive");
+		            
   				    echo display($row);
 			    }	
 		    }
@@ -39,7 +41,9 @@
 	    }
 	
 	}else if($action=="admin"){
-	
+	    
+	    //
+	    //require_once("adminArt.html");
 	    if(!isset($_SESSION["name"])){
             header("Location: DTTadmin.php?a=login");
 
@@ -50,8 +54,11 @@
                 header("Location: index.php");
                 break;
             case "add":
-                echo setTitle($template, "New Article");
+                $admin = file_get_contents("widgetAdmin.html");
+	            echo setTitle($template, "New Article", $admin);
+                
                 echo newArticle();
+                echo setFoot($link);
                 break;
             case "check":
                 $save = isset($_POST["save"]) ? $_POST["save"] : null;
@@ -88,7 +95,8 @@
 	            if($id== null){
 	                header("Location: DTTadmin.php?a=admin");
 	            }else{
-	                echo setTitle($template, "Edit Article");
+	                $admin = file_get_contents("widgetAdmin.html");
+	                echo setTitle($template, "Edit Article", $admin);
 	                $query = $pdo->prepare("SELECT * FROM articleTable WHERE id = :id"); 
                     $query->execute(array('id' => $id));
                     $row = $query->fetch();
@@ -101,7 +109,7 @@
                 $id = $_GET["c"];//if not null delete else go admin and dont play with urls
                 if(!isset($id))
                     header("Location: DTTadmin.php?a=admin");
-	            $query = $pdo->prepare("DELETE FROM articleTable WHERE if = :id"); 
+	            $query = $pdo->prepare("DELETE FROM articleTable WHERE id = :id"); 
                 $query->execute(array('id' => $id));
 	            header("Location: DTTadmin.php?a=admin");
                 break;

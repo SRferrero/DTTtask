@@ -24,8 +24,9 @@
   	    return $html;
    }
    
-   function setTitle($template, $str = ""){
+   function setTitle($template, $str = "",$admin = ""){
         $template = str_replace("{{TEST}}", $str, $template); 
+        $template = str_replace("{{ADMIN}}", $admin, $template); 
         return $template; 
    }
    
@@ -43,8 +44,8 @@
         
         return $article;
    }
-   
-   
+
+     
     function showDate($date, $opt = 0){
   	    $orderdate = explode('-', $date);
         $year = $orderdate[0];
@@ -68,7 +69,7 @@
         $article = file_get_contents("tableArticles.html");
         $article = str_replace("{{TITLE}}", $row["title"], $article);
         $article = str_replace("{{DATE}}", showDate($row["publishdate"],1), $article);
-        $article = str_replace("{{COUNT}}", $count, $article);
+        $article = str_replace("{{COUNT}}", $row["id"], $article);
         return $article;
     }
     
@@ -84,11 +85,13 @@
     }
     
     function newArticle($nArt = "nuevo articulo"){
+        //$nowDate = new DateTime();
+        //$nowDate->format('d/m/Y');
         $form = file_get_contents("formArticle.html");
-        $form = str_replace("{{TITLE}}", $nArt, $form);
+        $form = str_replace("{{TITLE}}", "", $form);
         $form = str_replace("{{SUMARY}}", $nArt, $form);
         $form = str_replace("{{ARTICLE}}", $nArt, $form);
-        $form = str_replace("{{DATE}}", $nArt, $form);
+        //$form = str_replace("{{DATE}}", "", $nArt, $form);
         $form = str_replace("{{BUTTON}}", "save", $form);
         
         return $form;
@@ -115,6 +118,7 @@
                     $_SESSION["name"] = $row["name"];
                        
                 }else{ $error="Wrong Password"; }
+                
             }else{ $error="user not in the system"; }
         }else{ $error=-1; }
 

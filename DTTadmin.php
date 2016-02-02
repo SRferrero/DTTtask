@@ -4,7 +4,8 @@
     
     //we dont have sesion yet
     $template = file_get_contents("DTTHeader.html");
-    echo setTitle($template);
+
+    
             /*$query = $pdo->prepare("INSERT INTO users(name, password) VALUES (?,?)");
         $query->bindParam(1, $name);
         $query->bindParam(2, $pass);
@@ -19,18 +20,24 @@
     }else if($action=="login"){
         if(isset($_SESSION["name"]))
             header("Location: DTTadmin.php?a=admin");
-    
+        echo setTitle($template);
         require_once("logIn.html");
+        
+        if(isset($_SESSION["error"])){
+            include("javascript.php");
+            //so it wont be messing when you go out of the log without logging
+            unset($_SESSION["error"]);
+        }
+            
         echo setFoot();
     }else if($action=="check"){
     
-        $user=$_POST["user"];
-        $pass=$_POST["password"];
+        $user = $_POST["user"];
+        $pass = $_POST["password"];
 
-        $_SESSION["error"]=login($user, $pass);
+        $_SESSION["error"] = login($user, $pass);
         header("Location: DTTadmin.php?a=admin");
 
-   //Pagina de registro
     }else if($action=="admin"){
     
         if(!isset($_SESSION["name"])){
@@ -38,7 +45,8 @@
 
         }else{
             //var_dump($_SESSION["name"]);
-	        echo file_get_contents("widgetAdmin.html");
+	        $admin = file_get_contents("widgetAdmin.html");
+	        echo setTitle($template, "", $admin);
 	        require_once("adminArt.html");
 	        $query = $pdo->prepare("SELECT * FROM articleTable");	
 	        $count = 0;

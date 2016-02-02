@@ -16,6 +16,7 @@ body{
 p{
     width:90%;
     -webkit-margin-before: 0em;
+    margin:1px;
 }
 
 a {
@@ -61,9 +62,12 @@ h1{
    color: #ffa64d;
 }
 
-textarea.form-control {
+.form-control {
   height: auto;
-  width:90%;
+  width:70%;
+  border-radius:6px;
+  background-color: #e5fff9;
+  
 }
 
 .btn {
@@ -88,6 +92,27 @@ textarea.form-control {
   border-radius: 4px;
 }
 
+.btn-primary {
+  margin-top:8%;
+  color: #fff;
+  background-color: #ff8000;
+  border-color: #2e6da4;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active {
+  color: #fff;
+  background-color: #ff8000;
+  border-color: #204d74;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+  background-image: none;
+}
+
 /* Menu Styles */
    .float-right{
       float:right;
@@ -103,13 +128,6 @@ textarea.form-control {
    }
 
 /* Main Container */
-#main-container{
-    width:950px;
-    overflow:hidden;
-    background:#fff;
-    margin:0px auto;
-    padding:20px;
-}
 
 #main-containerDTT{
     width:950px;
@@ -135,8 +153,8 @@ textarea.form-control {
     font-size: 0.7em;
 }
 
-/* Collection */
-#collection-container{
+
+#article-container{
     width:910px;
     padding:15px 0px 15px 0px;
     overflow:hidden;
@@ -175,10 +193,12 @@ textarea.form-control {
     margin-bottom: 15px;
     color: #ffdb4d;	
 }
+
 .wdgtadmin{
     font-size: 0.7em;
     margin-bottom:10px;
 }
+
 table#t01{
     width: 90%;
     text-align: left;
@@ -208,7 +228,44 @@ table#t01 tr:nth-child(odd) {
 table#t01 tr:nth-child(even) {
    background-color:#fff;
 }
-.logout{
-
-
+label{
+    width:20%;
+    float:left;
 }
+.logIn{
+      width:400px;
+      height:200px;
+      position: relative;
+      top:50%;
+      left:25%;
+      -webkit-box-shadow: -5px 10px 19px 0px rgba(46,36,46,0.89);
+      -moz-box-shadow: -5px 10px 19px 0px rgba(46,36,46,0.89);
+      box-shadow: -5px 10px 19px 0px rgba(46,36,46,0.89);
+      border-radius:5px;
+      background-color:#fac44a;
+      text-align:center;
+      border:1px solid #ccc;
+      float:left;
+      margin:15px;
+}
+
+.looginf{
+    margin-top:10%;
+}
+.art{
+      width:90%;
+      height:580px;
+      position: relative;
+      top:50%;
+      left:5%;
+      -webkit-box-shadow: -5px 10px 19px 0px rgba(46,36,46,0.89);
+      -moz-box-shadow: -5px 10px 19px 0px rgba(46,36,46,0.89);
+      box-shadow: -5px 10px 19px 0px rgba(46,36,46,0.89);
+      border-radius:5px;
+      padding-top: 20px;
+      background-color:#fac44a;
+      text-align:center;
+      border:1px solid #ccc;
+      
+}
+

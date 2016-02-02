@@ -4,7 +4,7 @@
 	echo setTitle($template);
 	
 	try {  
-  		$query = $pdo->prepare("SELECT * FROM articleTable LIMIT 5");	
+  		$query = $pdo->prepare("SELECT * FROM articleTable ORDER BY id DESC LIMIT 5");	
         if ($query->execute()) { 
 		    while ($row = $query->fetch()){
   					echo display($row); 
