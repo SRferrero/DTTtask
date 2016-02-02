@@ -1,12 +1,10 @@
 <?php
     require_once("DTTCore.php");
+    //include 'classes/validate.php';
+    
     $action = $_GET["a"];
-    
-    //we dont have sesion yet
     $template = file_get_contents("DTTHeader.html");
-
-    
-            /*$query = $pdo->prepare("INSERT INTO users(name, password) VALUES (?,?)");
+        /*$query = $pdo->prepare("INSERT INTO users(name, password) VALUES (?,?)");
         $query->bindParam(1, $name);
         $query->bindParam(2, $pass);
         $name = "samuel";
@@ -24,6 +22,7 @@
         require_once("logIn.html");
         
         if(isset($_SESSION["error"])){
+        
             include("javascript.php");
             //so it wont be messing when you go out of the log without logging
             unset($_SESSION["error"]);
@@ -32,9 +31,18 @@
         echo setFoot();
     }else if($action=="check"){
     
+        $registerValidationErrors = array();
+
         $user = $_POST["user"];
         $pass = $_POST["password"];
-
+        /*
+        $validateRegister = new Validate();
+        
+	    $validation = $validateRegister->check($_POST, array(
+	            'name' => array('required' => true),
+	            'password' => array('required' => true)
+  				));
+  	    */	                         
         $_SESSION["error"] = login($user, $pass);
         header("Location: DTTadmin.php?a=admin");
 
