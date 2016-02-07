@@ -1,2 +1,0 @@
-# DTTtask
-new intern incoming
